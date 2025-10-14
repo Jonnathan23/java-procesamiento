@@ -16,10 +16,15 @@ public class gaussian {
             
             float[] matrix = createGaussianKernel(kernelSize, sigma);
 
+            // 📏 Medir tiempo de ejecución
+            long startTime = System.nanoTime();
             // Aplicar el filtro
             Kernel kernel = new Kernel(kernelSize, kernelSize, matrix);
             ConvolveOp op = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
             BufferedImage blurred = op.filter(image, null);
+            
+            long endTime = System.nanoTime(); 
+
 
             //Guardar la imagen resultante
             File output = new File(
@@ -28,6 +33,9 @@ public class gaussian {
 
             System.out.println("✅ Filtro gaussiano aplicado con éxito.");
             System.out.println("Imagen guardada en: " + output.getAbsolutePath());
+
+            double elapsedTimeSec = (endTime - startTime) / 1_000_000_000.0;
+            System.out.printf("⏱️ Tiempo de aplicación del filtro: %.3f segundos%n", elapsedTimeSec);
 
         } catch (Exception e) {
             System.out.println("❌ Error al aplicar el filtro: " + e.getMessage());
