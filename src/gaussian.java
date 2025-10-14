@@ -28,7 +28,7 @@ public class gaussian {
 
             //Guardar la imagen resultante
             File output = new File(
-                    "C:/Users/Jonna/Desktop/ups/8ctavo ciclo/paralelo/Filtros_java/imgs/digital_art_blur_dynamic.jpg");
+                    "C:/Users/Jonna/Desktop/ups/8ctavo ciclo/paralelo/Filtros_java/imgs/digital_art_blur_dynamic_sin_hilos.jpg");
             ImageIO.write(blurred, "jpg", output);
 
             System.out.println("✅ Filtro gaussiano aplicado con éxito.");

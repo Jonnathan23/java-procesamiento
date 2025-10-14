@@ -9,19 +9,19 @@ public class gaussianTwoThreads {
         try {
             String pathImage = "C:/Users/Jonna/Desktop/ups/8ctavo ciclo/paralelo/Filtros_java/imgs/digital_art.jpg";
 
-            // 🖼️ Cargar la imagen original
+            // Cargar la imagen original
             BufferedImage image = ImageIO.read(new File(pathImage));
 
-            // 🔧 Parámetros del filtro
+            // Parámetros del filtro
             int kernelSize = 51; // Tamaño del kernel
             double sigma = 15;   // Desviación estándar (controla la intensidad del desenfoque)
 
-            // 🧮 Generar el kernel gaussiano
+            // Generar el kernel gaussiano
             float[] matrix = createGaussianKernel(kernelSize, sigma);
             Kernel kernel = new Kernel(kernelSize, kernelSize, matrix);
             ConvolveOp op = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
 
-            // 📏 Dividir la imagen en 2 mitades horizontales
+            // Dividir la imagen en 2 mitades horizontales
             int width = image.getWidth();
             int height = image.getHeight();
             int midHeight = height / 2;
@@ -32,7 +32,7 @@ public class gaussianTwoThreads {
             BufferedImage topResult = new BufferedImage(width, midHeight, image.getType());
             BufferedImage bottomResult = new BufferedImage(width, height - midHeight, image.getType());
 
-            // 🧵 Crear hilos para cada mitad
+            // Crear hilos para cada mitad
             Thread thread1 = new Thread(() -> {
                 op.filter(topHalf, topResult);
             });
@@ -41,7 +41,7 @@ public class gaussianTwoThreads {
                 op.filter(bottomHalf, bottomResult);
             });
 
-            // ⏱️ Medir tiempo de ejecución total
+            //  Medir tiempo de ejecución total
             long startTime = System.nanoTime();
 
             thread1.start();
@@ -53,16 +53,16 @@ public class gaussianTwoThreads {
 
             long endTime = System.nanoTime();
 
-            // 🔄 Combinar los resultados
+            // Combinar los resultados
             BufferedImage finalImage = new BufferedImage(width, height, image.getType());
             finalImage.createGraphics().drawImage(topResult, 0, 0, null);
             finalImage.createGraphics().drawImage(bottomResult, 0, midHeight, null);
 
-            // 💾 Guardar la imagen resultante
-            File output = new File("C:/Users/Jonna/Desktop/ups/8ctavo ciclo/paralelo/Filtros_java/imgs/digital_art_blur_parallel.jpg");
+            // Guardar la imagen resultante
+            File output = new File("C:/Users/Jonna/Desktop/ups/8ctavo ciclo/paralelo/Filtros_java/imgs/digital_art_blur_parallel_dos_hilos.jpg");
             ImageIO.write(finalImage, "jpg", output);
 
-            // 🧠 Mostrar resultados
+            // Mostrar resultados
             System.out.println("✅ Filtro gaussiano aplicado en paralelo con 2 hilos.");
             System.out.println("Imagen guardada en: " + output.getAbsolutePath());
 
