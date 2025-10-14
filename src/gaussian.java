@@ -6,26 +6,22 @@ import javax.imageio.ImageIO;
 
 public class gaussian {
     public static void main(String[] args) {
-        try {
-            // 📁 Ruta de la imagen original
+        try {            
             String pathImage = "C:/Users/Jonna/Desktop/ups/8ctavo ciclo/paralelo/Filtros_java/imgs/digital_art.jpg";
-
-            // 🖼️ Cargar la imagen
+            
             BufferedImage image = ImageIO.read(new File(pathImage));
 
-            // 🔧 Parámetros configurables
-            int kernelSize = 51; // Tamaño del kernel (debe ser impar: 3, 5, 7, 9...)
+            int kernelSize = 51; // Tamaño del kernel
             double sigma = 15; // Desviación estándar (controla la intensidad del desenfoque)
-
-            // 🧮 Generar el kernel gaussiano
+            
             float[] matrix = createGaussianKernel(kernelSize, sigma);
 
-            // 📦 Crear y aplicar el filtro
+            // Aplicar el filtro
             Kernel kernel = new Kernel(kernelSize, kernelSize, matrix);
             ConvolveOp op = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
             BufferedImage blurred = op.filter(image, null);
 
-            // 💾 Guardar la imagen resultante
+            //Guardar la imagen resultante
             File output = new File(
                     "C:/Users/Jonna/Desktop/ups/8ctavo ciclo/paralelo/Filtros_java/imgs/digital_art_blur_dynamic.jpg");
             ImageIO.write(blurred, "jpg", output);
@@ -39,7 +35,13 @@ public class gaussian {
         }
     }
 
-    // 📘 Función para generar un kernel gaussiano dinámico
+    
+    /**
+     * @description Función para generar un kernel gaussiano dinámico
+     * @param size
+     * @param sigma
+     * @return
+     */
     public static float[] createGaussianKernel(int size, double sigma) {
         float[] kernel = new float[size * size];
         double mean = size / 2;
