@@ -14,7 +14,7 @@ El experimento evaluó la **multiplicación de matrices cuadradas** en un entorn
 | 2000×2000  | 66.499 | 61.955 | 4.544 | 6.8 % |
 | 3000×3000  | 292.986 | 284.145 | 8.841 | 3.0 % |
 
-<img src="imgs/multiplicacion_matrices_cloud_barras.png" alt="Imagen Comparativa" width="200">
+<img src="imgs/multiplicacion_matrices_cloud_barras.png" alt="Imagen Comparativa" width="500">
 
 **Interpretación:**  
 - En matrices pequeñas (1000×1000), la sobrecarga de creación y sincronización de hilos supera el beneficio del paralelismo, resultando en un tiempo ligeramente peor.  
@@ -53,7 +53,7 @@ Esto evidencia que el **beneficio del paralelismo depende directamente del tama�
 
 - La **eficiencia** se mantiene por encima de 1.0, lo cual sugiere un **superescalamiento leve**, posiblemente debido al uso efectivo de la caché y la planificación del sistema operativo.
 
-<img src="imgs/comparativa_filtro_gauss.png" alt="Imagen Comparativa" width="200">
+<img src="imgs/comparativa_filtro_gauss.png" alt="Imagen Comparativa" width="500">
 
 ---
 
